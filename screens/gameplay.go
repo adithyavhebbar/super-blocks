@@ -27,7 +27,7 @@ var Color [4]rl.Color = [4]rl.Color{rl.Black, rl.Gray, rl.DarkGreen, rl.Magenta}
 
 func GameInit() {
 	Points = 0
-	Poing = rl.LoadSound("assets/Player_clition.wav")
+	Poing = rl.LoadSound("assets/Player_colition.wav")
 	Music = rl.LoadMusicStream("assets/melodic-techno-03-extended-version-moogify-9867.mp3")
 
 	Player.Size = rl.Vector2{X: float32(rl.GetScreenWidth() / 10), Y: float32(rl.GetScreenHeight() / 30)}
