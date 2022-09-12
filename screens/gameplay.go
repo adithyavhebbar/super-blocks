@@ -32,7 +32,7 @@ func GameInit() {
 
 	Player.Size = rl.Vector2{X: float32(rl.GetScreenWidth() / 10), Y: float32(rl.GetScreenHeight() / 30)}
 	Player.Pos = rl.Vector2{X: float32(rl.GetScreenWidth()/2 - int(Player.Size.X)/2), Y: float32(rl.GetScreenHeight() - int(Player.Size.Y))}
-	Player.Speed = 400
+	Player.Speed = 500
 	Player.Lives = 5
 
 	Ball.Radius = 20
@@ -107,7 +107,11 @@ func GamePlayUpdate() {
 				for j := 0; j < BrickColumns; j++ {
 					if Bricks[i][j].IsActive {
 						if rl.CheckCollisionCircleRec(Ball.Pos, Ball.Radius, Bricks[i][j].GetRect()) {
-
+							if Ball.Speed.X > 0 {
+								if Ball.Pos.Y >= Bricks[i][j].Pos.Y-Bricks[i][j].Size.Y && Ball.Pos.Y <= Bricks[i][j].Pos.Y && Ball.Pos.X < Bricks[i][j].Pos.X+Bricks[i][j].Size.X {
+									Ball.Speed.X *= -1
+								}
+							}
 						}
 					}
 				}
