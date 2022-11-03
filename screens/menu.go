@@ -100,8 +100,8 @@ func MenuDraw() {
 	yCenter = int32(ExitRect.Height / 2)
 	rl.DrawText("Exit", ExitRect.ToInt32().X+xCenter, int32(ExitRect.Y+float32(yCenter)), 20, rl.RayWhite)
 
-	rl.DrawText("Super", int32(rl.GetScreenWidth()/2), int32(rl.GetScreenHeight()/2-10), 80, rl.Red)
-	rl.DrawText("Blocks", int32(rl.GetScreenWidth()/2), int32(rl.GetScreenHeight()/2)+80, 80, rl.Red)
+	rl.DrawText("Super", int32(rl.GetScreenWidth()/2), int32(rl.GetScreenHeight()/2-50), 100, rl.Red)
+	rl.DrawText("Blocks", int32(rl.GetScreenWidth()/2), int32(rl.GetScreenHeight()/2)+40, 100, rl.Red)
 	rl.DrawText("Use the mouse to move and Interact", 10, int32(rl.GetScreenHeight()-40), 40, rl.Black)
 	rl.EndDrawing()
 }

@@ -33,9 +33,9 @@ func Run() {
 }
 
 func Init() {
+	rl.InitAudioDevice()
 	screens.MenuInit()
 	screens.GameInit()
-	rl.InitAudioDevice()
 }
 
 func DeInit() {
@@ -51,10 +51,10 @@ func Change() {
 		screens.GamePlayUpdate()
 
 	case screenType.ScreenType.Controls:
-		break
+		screens.ControlsUpdate()
 
 	case screenType.ScreenType.Credits:
-		break
+		screens.CreditsUpdate()
 
 	case screenType.ScreenType.End:
 		playing = false
