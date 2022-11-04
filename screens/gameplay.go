@@ -11,7 +11,7 @@ import (
 const (
 	BrickRows    = 4
 	BrickColumns = 10
-	Offset       = 80
+	Offset       = 60
 )
 
 var Player structs.Player
@@ -53,7 +53,7 @@ func GameInit() {
 			Bricks[i][j] = structs.Brick{}
 			Bricks[i][j].Color = int(rl.GetRandomValue(0, 1))
 			Bricks[i][j].IsActive = true
-			Bricks[i][j].Size = rl.Vector2{X: float32(rl.GetScreenWidth() / 20), Y: float32(rl.GetScreenHeight() / 20)}
+			Bricks[i][j].Size = rl.Vector2{X: float32(rl.GetScreenWidth() / 20), Y: float32(rl.GetScreenHeight() / 25)}
 			Bricks[i][j].Pos = rl.Vector2{X: float32((rl.GetScreenWidth())/20 + (rl.GetScreenWidth() / 20 * (j - 1)) + (j * Offset) + rl.GetScreenWidth()/10), Y: float32((rl.GetScreenHeight())/20 + (rl.GetScreenHeight() / 20 * (i - 1)) + i*Offset)}
 		}
 	}
@@ -245,9 +245,9 @@ func GamePlayInput() {
 
 			if Player.Pos.X > 0 {
 				if rl.IsKeyDown(rl.KeyLeft) {
-					Player.Pos.X -= float32(Player.Speed) * rl.GetFrameTime() * 1.3
+					Player.Pos.X -= float32(Player.Speed) * rl.GetFrameTime() * 1.8
 					if !Ball.IsActive {
-						Ball.Pos.X -= float32(Player.Speed) * rl.GetFrameTime() * 1.3
+						Ball.Pos.X -= float32(Player.Speed) * rl.GetFrameTime() * 1.8
 					}
 				}
 			}
