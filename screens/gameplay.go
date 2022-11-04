@@ -27,7 +27,7 @@ var pause bool = false
 
 var Color [4]rl.Color = [4]rl.Color{rl.Black, rl.Gray, rl.DarkGreen, rl.Magenta}
 
-var PointsForEachBrick int = 10
+var PointsForEachBrick int = 5
 
 var LivesLeft int = 5
 
@@ -67,13 +67,19 @@ func GamePlayUpdate() {
 	rl.UpdateMusicStream(Music)
 
 	win = true
+	activeBlocks := 0
 	for i := 0; i < len(Bricks); i++ {
 		for j := 0; j < len(Bricks[i]); j++ {
 			if Bricks[i][j].IsActive {
+				activeBlocks++
 				win = false
 				break
 			}
 		}
+	}
+
+	if activeBlocks == 0 {
+		win = true
 	}
 
 	if !win {
@@ -81,8 +87,8 @@ func GamePlayUpdate() {
 			GameOverState = true
 		} else if !pause {
 			if Ball.IsActive {
-				Ball.Pos.X += (Ball.Speed.X + 50) * rl.GetFrameTime()
-				Ball.Pos.Y += (Ball.Speed.Y + 50) * rl.GetFrameTime()
+				Ball.Pos.X += (Ball.Speed.X) * rl.GetFrameTime() * 2
+				Ball.Pos.Y += (Ball.Speed.Y) * rl.GetFrameTime() * 2
 			} else {
 				Ball.Pos = rl.Vector2{X: Player.Pos.X + Player.Size.X/2, Y: Player.Pos.Y - Ball.Radius}
 			}
@@ -178,7 +184,7 @@ func GamePlayDraw() {
 		if GameOverState {
 			rl.DrawText("Press ENTER to play Again", int32(rl.GetScreenWidth())/2, int32(rl.GetScreenHeight())/2, 40, rl.Red)
 		} else {
-			rl.DrawText("Score: "+fmt.Sprintf("%d", Points), int32(rl.GetScreenWidth()-170), 50, 35, rl.Black)
+			rl.DrawText("Score: "+fmt.Sprintf("%d", Points), int32(rl.GetScreenWidth()-190), 50, 35, rl.Black)
 			rl.DrawText("Lives: "+fmt.Sprintf("%d", Player.Lives), int32(rl.GetScreenWidth()-170), 90, 35, rl.Black)
 			if !pause {
 				rl.DrawRectangle(int32(Player.Pos.X), int32(Player.Pos.Y), int32(Player.Size.X), int32(Player.Size.Y), rl.Blue)
@@ -239,9 +245,9 @@ func GamePlayInput() {
 
 			if Player.Pos.X > 0 {
 				if rl.IsKeyDown(rl.KeyLeft) {
-					Player.Pos.X -= float32(Player.Speed) * rl.GetFrameTime()
+					Player.Pos.X -= float32(Player.Speed) * rl.GetFrameTime() * 1.3
 					if !Ball.IsActive {
-						Ball.Pos.X -= float32(Player.Speed) * rl.GetFrameTime()
+						Ball.Pos.X -= float32(Player.Speed) * rl.GetFrameTime() * 1.3
 					}
 				}
 			}
